@@ -6,41 +6,51 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            console.log('Fetching file_list.json');
             return response.json();
         })
         .then(files => {
-            console.log('Files received:', files);
             const vessel = document.getElementById('vessel');
+            
+            // Détecte le mois actuel via le navigateur (ex. février)
+            let currentMonth = new Date().toLocaleString('fr-FR', { month: 'long' }).toLowerCase();
+            
+            // Optionnel : si tes dossiers s'appellent "fevrier", "mars", ...
+            // et pas "février" avec accent, c'est généralement cohérent.
+            // Sinon, fais un mapping JS similaire à ton Python pour
+            // aligner "février" <-> "fevrier" etc.
 
-            // Parcourir chaque clé du fichier JSON
+            // On parcourt tous les "mois" qu'on a dans le JSON
             Object.keys(files).forEach(month => {
-                console.log(`Processing files for ${month}`);
+                // On veut afficher la clé "toujours" et la clé du "mois courant"
+                // Si tu souhaites afficher TOUS les mois, enlève ce if()
+                if (month.toLowerCase() === currentMonth || month === 'toujours') {
+                    
+                    // Pour chaque PDF dans ce mois
+                    files[month].forEach(filename => {
+                        const card = document.createElement('div');
+                        card.classList.add('card');
+                        card.onclick = () => downloadPDF(month, filename);
 
-                files[month].forEach(filename => {
-                    console.log('Processing file:', filename);
+                        const img = document.createElement('img');
+                        if (month === 'toujours') {
+                            img.src = `../../pdf/toujours/${filename}.jpg`;
+                        } else {
+                            img.src = `../../pdf/${month}/${filename}.jpg`;
+                        }
+                        img.alt = filename;
+                        img.onerror = () => {
+                            console.error(`Image not found: ${img.src}`);
+                            img.src = '../../img/placeholder.jpg';
+                        };
 
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-                    card.onclick = () => downloadPDF(month, filename);
+                        const p = document.createElement('p');
+                        p.textContent = filename;
 
-                    const img = document.createElement('img');
-                    img.src = month === 'toujours' ? `../../pdf/toujours/${filename}.jpg` : `../../pdf/${month}/${filename}.jpg`;
-                    img.alt = filename;
-                    img.onerror = () => {
-                        console.error(`Image not found: ${img.src}`);
-                        img.src = '../../img/placeholder.jpg'; // Chemin de l'image de remplacement si l'image n'est pas trouvée
-                    };
-
-                    const p = document.createElement('p');
-                    p.textContent = filename;
-
-                    card.appendChild(img);
-                    card.appendChild(p);
-                    vessel.appendChild(card);
-
-                    console.log('Card created for:', filename);
-                });
+                        card.appendChild(img);
+                        card.appendChild(p);
+                        vessel.appendChild(card);
+                    });
+                }
             });
         })
         .catch(error => {
@@ -50,8 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function downloadPDF(month, filename) {
     const link = document.createElement('a');
-    link.href = month === 'toujours' ? `../../pdf/toujours/${filename}.pdf` : `../../pdf/${month}/${filename}.pdf`;
+    if (month === 'toujours') {
+        link.href = `../../pdf/toujours/${filename}.pdf`;
+    } else {
+        link.href = `../../pdf/${month}/${filename}.pdf`;
+    }
     link.download = `${filename}.pdf`;
     link.click();
-    console.log('Download initiated for:', filename);
 }
