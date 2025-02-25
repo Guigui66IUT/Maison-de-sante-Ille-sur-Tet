@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const vessel = document.getElementById('vessel');
             
             // Détecte le mois actuel via le navigateur (ex. février)
-            let currentMonth = new Date().toLocaleString('fr-FR', { month: 'long' }).toLowerCase();
+            let currentMonth = "fevrier"//new Date().toLocaleString('fr-FR', { month: 'long' }).toLowerCase();
             
             // Optionnel : si tes dossiers s'appellent "fevrier", "mars", ...
             // et pas "février" avec accent, c'est généralement cohérent.
