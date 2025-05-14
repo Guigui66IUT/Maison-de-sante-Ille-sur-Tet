@@ -152,10 +152,7 @@
                 "order": 3
             }
         ],
-        "pdf": {
-            "path": "Dr Dagmar RUNGEN\\additional.pdf",
-            "name": "additional.pdf"
-        }
+        "pdf": null
     },
     {
         "name": "Dr Jean-Pascal SASTOURNÉ",
