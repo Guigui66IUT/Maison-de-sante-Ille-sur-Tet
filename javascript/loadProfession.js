@@ -107,6 +107,13 @@ function toggleText(element) {
 }
 
 function revealPhoneNumber(button, phoneNumber) {
+  const originalText = button.dataset.originalText || 'Prendre rendez-vous';
+  // Si on affiche déjà le numéro, on revient au texte original
+  if (button.innerText === phoneNumber) {
+    button.innerText = originalText;
+  } else {
+    // Sinon, on stocke le texte original et on affiche le numéro
+    button.dataset.originalText = originalText;
     button.innerText = phoneNumber;
-    button.disabled = true;
+  }
 }
