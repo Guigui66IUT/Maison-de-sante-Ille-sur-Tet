@@ -455,30 +455,34 @@ input {
 
 
 
-/* Pour aligner le texte et le bouton sur la même ligne */
-.sos-group {
-  display: flex;
+/* 1. Force le .info-group.sos-group à s’aligner en ligne */
+.info-group.sos-group {
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
 }
 
-/* Regroupe le texte SOS et le bouton */
+/* 2. Ajuste le conteneur texte + bouton */
 .sos-action {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex: 1;             /* occupe tout l’espace disponible */
   gap: 0.75rem;
 }
 
-/* Style du bouton */
-.btn-sos {
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  background-color: #4682B4;
-  color: white;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  font-weight: bold;
-  transition: background-color 0.2s;
+/* 3. Override de .info-text pour qu’il ne prenne plus 100% */
+.sos-action .info-text {
+  width: auto !important;
+  flex: 0 1 auto !important;
+  margin: 0;           /* on gère l’espace avec gap */
+}
+
+/* 4. Pousse le bouton tout à droite */
+.sos-action .btn-sos {
+  margin-left: auto;
 }
 
 .btn-sos:hover {
