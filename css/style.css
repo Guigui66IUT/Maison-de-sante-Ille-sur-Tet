@@ -450,6 +450,11 @@ input {
 /*--------------------------------------
   Section SOS Médecin
 --------------------------------------*/
+/*--------------------------------------
+  Section SOS Médecin
+--------------------------------------*/
+
+/* Empile la ligne “Soirs après 20h …” puis le conteneur texte+bouton */
 .info-group.sos-group {
   display: flex;
   flex-direction: column;
@@ -458,21 +463,28 @@ input {
   margin: 5px 0;
 }
 
+/* Affiche le paragraphe et le bouton sur la même ligne */
 .sos-action {
-  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;        /* espace entre "3624" et le bouton */
+  width: 90%;         /* même largeur que vos autres <p> */
+  margin: 0 auto;     /* indentation identique aux autres lignes */
 }
 
+/* Texte aligné à gauche, sans marge supplémentaire */
 .sos-action .info-text {
-  width: 90%;
-  margin: 0 auto 5px;
+  margin: 0;
+  flex: 0 1 auto;
   text-align: left;
 }
 
+
+/* Bouton juste après le texte */
 .sos-action .btn-sos {
-  display: block;
-  margin: 0.5rem auto 0;
+  margin: 0;
+  display: inline-block;
   padding: 0.4rem 0.8rem;
   background-color: #4682B4;
   color: #fff;
