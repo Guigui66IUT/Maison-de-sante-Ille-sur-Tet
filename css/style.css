@@ -213,26 +213,25 @@ input {
 		top: 100%;
 	}
 
-	input:checked+.main-header nav {
+	/* Quand la checkbox est cochée, on ouvre le nav injecté */
+	input:checked + #main-header header.main-header nav {
 		height: 100vh;
 	}
 
-	input:checked+.main-header label div:nth-child(1) {
+	/* Transformation des 3 barres du burger */
+	input:checked + #main-header header.main-header label div:nth-child(1) {
 		transform: rotate(45deg);
 		top: 50%;
 	}
-
-	input:checked+.main-header label div:nth-child(3) {
-		transform: rotate(-45deg);
-		top: 50%;
-	}
-
-	input:checked+.main-header label div:nth-child(2) {
+	input:checked + #main-header header.main-header label div:nth-child(2) {
 		transform: scale(0);
 		opacity: 0;
 	}
+	input:checked + #main-header header.main-header label div:nth-child(3) {
+		transform: rotate(-45deg);
+		top: 50%;
+  	}
 }
-
 
 
 
