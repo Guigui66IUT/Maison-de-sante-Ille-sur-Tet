@@ -330,132 +330,127 @@ input {
 
 
 
-
-
+/*--------------------------------------
+  Container principal
+---------------------------------------*/
 .intro {
-	width: 40%;
-	margin-right: 3%;
-	margin-top: 2.5%;
-	display: flex;
-	flex-direction: column;
+  width: 40%;
+  margin: 2.5% 3% 0 0;
+  display: flex;
+  flex-direction: column;
 }
 
+/*--------------------------------------
+  Carte d’information
+---------------------------------------*/
 .card {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-	background-color: #EDFAFF;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	margin-bottom: 10px;
-	text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: #EDFAFF;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .card h2 {
-	font-size: 24px;
-	margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .card p {
-	width: 90%;
-	margin: 0 auto;
-	text-align: left;
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
 }
 
+/*--------------------------------------
+  Groupe d’informations
+---------------------------------------*/
 .info-group {
-	flex: 1;
-	margin: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	width: 100%;
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
+/*--------------------------------------
+  Bandeau d’en-tête
+---------------------------------------*/
 .info {
-	width: 100%;
-	background-color: #1E3F66;
-	padding: 2%;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	color: white;
-	font-weight: bold;
-	font-size: 1.2rem;
-	text-align: center;
-	margin-bottom: 5%; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1E3F66;
+  padding: 2%;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 5%;
 }
 
 .info i {
-	margin-right: 10px;
-	color: inherit;
-	align-self: flex-start;
+  margin-right: 10px;
+  align-self: flex-start;
 }
 
 .info p {
-	margin: 0;
-	text-align: center;
-	flex: 1;
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
-.info-text, .info-urgence {
-	display: flex;  /* Permet l'alignement horizontal du texte et de la carte */
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%; /* S'assure que .info-text occupe toute la largeur */
-	color: #333;
-	margin-bottom: 5px !important; 
-	font-size: 1rem !important;
-
-
+/*--------------------------------------
+  Lignes de texte et d’urgence
+---------------------------------------*/
+.info-text,
+.info-urgence {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333;
+  margin-bottom: 5px !important;
+  font-size: 1rem !important;
 }
 
-.info-text p, .info-urgence p{
-	flex: 1;  /* Le texte prendra tout l'espace disponible */
-	margin-right: 1%;  /* Ajoute un espacement à droite pour éloigner la carte */
-}
-
-.maps {
-	flex: 1;  /* La carte prend également l'espace disponible */
-	width: 50%;  /* Ajuste la largeur de la carte à 50% de l'espace */
-}
-
-.maps iframe {
-	width: 100%; /* La carte occupera 100% de la largeur définie par .maps */
-	height: 10vh; /* Hauteur ajustable selon tes besoins */
-	border: none;
+/* Ne plus forcer .info-text à 100% */
+.info-text p,
+.info-urgence p {
+  flex: 1;
+  margin-right: 1%;
 }
 
 .info-urgence {
-	color: red;
-
-
+  color: red;
 }
 
+/*--------------------------------------
+  Intégration Google Maps
+---------------------------------------*/
+.maps {
+  flex: 1;
+  width: 50%;
+}
 
+.maps iframe {
+  width: 100%;
+  height: 10vh;
+  border: none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 1. Force le .info-group.sos-group à s’aligner en ligne */
+/*--------------------------------------
+  Section SOS Médecin
+---------------------------------------*/
+/* Aligne horizontalement le groupe */
 .info-group.sos-group {
   display: flex !important;
   flex-direction: row !important;
@@ -464,27 +459,34 @@ input {
   gap: 0.5rem;
 }
 
-/* 2. Ajuste le conteneur texte + bouton */
+/* Conteneur texte + bouton */
 .sos-action {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex: 1;             /* occupe tout l’espace disponible */
+  flex: 1;
   gap: 0.75rem;
 }
 
-/* 3. Override de .info-text pour qu’il ne prenne plus 100% */
+/* Texte SOS Médecin taille auto */
 .sos-action .info-text {
   width: auto !important;
   flex: 0 1 auto !important;
-  margin: 0;           /* on gère l’espace avec gap */
+  margin: 0;
 }
 
-/* 4. Pousse le bouton tout à droite */
+/* Bouton Prendre RDV */
 .sos-action .btn-sos {
   margin-left: auto;
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background-color: #4682B4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
-.btn-sos:hover {
+.sos-action .btn-sos:hover {
   background-color: #1E3F66;
 }
