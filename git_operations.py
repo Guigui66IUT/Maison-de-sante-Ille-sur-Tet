@@ -1,37 +1,53 @@
 import subprocess
 import importlib.util
+import os
+from git import Repo, exc
 
 def ensure_gitpython_and_push(repo_path, commit_message):
-    package_name = 'gitpython'
+    # Installer GitPython si nécessaire
+    package_name = 'git'
+    if importlib.util.find_spec(package_name) is None:
+        subprocess.run(['py', '-m', 'pip', 'install', 'GitPython'], check=True)
 
-    # Fonction pour vérifier si un package est installé
-    def is_installed(package_name):
-        spec = importlib.util.find_spec(package_name)
-        return spec is not None
-
-    # Vérifier si GitPython est installé, sinon l'installer
-    if not is_installed(package_name):
-        subprocess.run(['py', '-m', 'pip', 'install', package_name], check=True)
-
-    # Importer GitPython après l'installation
-    import git
-
-    # Utiliser GitPython pour effectuer un git push
-    repo = git.Repo(repo_path)
-
-    # Ajouter tous les fichiers modifiés
-    repo.git.add('--all')
-
-    # Faire un commit
-    repo.index.commit(commit_message)
-
-    # Effectuer un push
+    # Ouvrir le dépôt
+    repo = Repo(repo_path)
     origin = repo.remote(name='origin')
-    origin.push()
 
+    # Récupérer la branche active
+    try:
+        branch = repo.active_branch.name
+    except TypeError:
+        # En cas de HEAD détaché, on prend 'master' par défaut
+        branch = 'master'
 
+    # 1) fetch + pull pour éviter le non-fast-forward
+    try:
+        origin.fetch()
+        origin.pull(branch)
+        print(f"✅ Branche '{branch}' synchronisée avec origin/{branch}")
+    except exc.GitCommandError as e:
+        print(f"⚠️ Pull a échoué : {e}. Vous pouvez tenter un rebase ou vérifier les conflits.")
 
-# Utiliser la fonction
-repo_path = './'
-commit_message = 'Votre message de commit'
-ensure_gitpython_and_push(repo_path, commit_message)
+    # 2) Ajouter et committer
+    repo.git.add('--all')
+    try:
+        repo.index.commit(commit_message)
+        print(f"✅ Commit effectué : « {commit_message} »")
+    except exc.GitCommandError as e:
+        print(f"⚠️ Commit a échoué : {e}")
+
+    # 3) Pousser et afficher le résultat
+    try:
+        push_results = origin.push(branch)
+        for info in push_results:
+            # info.flags & info.ERROR non nul = erreur
+            if info.flags & info.ERROR:
+                print(f"❌ Push échoué : {info.summary}")
+            else:
+                print(f"✅ Push réussi : {info.summary}")
+    except exc.GitCommandError as e:
+        print(f"❌ Erreur lors du push : {e}")
+
+if __name__ == "__main__":
+    repo_path = os.path.abspath(os.path.dirname(__file__))
+    ensure_gitpython_and_push(repo_path, 'Votre message de commit')
