@@ -491,3 +491,27 @@ input {
 .sos-action .btn-sos:hover {
   background-color: #1E3F66;
 }
+
+
+
+
+
+#google_translate_element {
+  margin-top: 0.5rem;      /* espace au-dessus */
+}
+#google_translate_element select {
+  background: #4682B4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
