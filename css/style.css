@@ -438,3 +438,49 @@ input {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Pour aligner le texte et le bouton sur la même ligne */
+.sos-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Regroupe le texte SOS et le bouton */
+.sos-action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Style du bouton */
+.btn-sos {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background-color: #4682B4;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-sos:hover {
+  background-color: #1E3F66;
+}
