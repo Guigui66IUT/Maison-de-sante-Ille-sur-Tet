@@ -496,9 +496,16 @@ input {
 
 
 
-#google_translate_element {
-  margin-top: 0.5rem;      /* espace au-dessus */
+/* Style du lien “Langue” avant injection du select */
+.translate-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #4682B4;
+  font-weight: bold;
 }
+
+/* Style du <select> Google Translate qui sera injecté */
 #google_translate_element select {
   background: #4682B4;
   color: #fff;
@@ -509,6 +516,9 @@ input {
   cursor: pointer;
 }
 
+/* Masquer la barre flottante Google Translate */
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0 !important; }
 
 
 
