@@ -451,35 +451,30 @@ input {
   Section SOS Médecin
 --------------------------------------*/
 
-/* Empile verticalement le groupe SOS */
+/* Empile verticalement et aligne tout le contenu à gauche */
 .info-group.sos-group {
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
   margin: 5px 0;
 }
 
-/* Conteneur texte + bouton centré */
+/* Conteneur texte + bouton */
 .sos-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;  /* centre horizontalement */
   width: 100%;
-  gap: 0.5rem;
 }
 
-/* Le texte ne force pas de largeur */
+/* Assure-toi que le texte reste aligné à gauche */
 .sos-action .info-text {
-  width: auto !important;
-  flex: 0 1 auto !important;
   margin: 0;
-  text-align: center;
+  text-align: left;
 }
 
-/* Bouton Prendre RDV */
+/* Centre uniquement le bouton */
 .sos-action .btn-sos {
-  display: inline-block;
+  display: block;          /* pour que margin auto prenne effet */
+  margin: 0.5rem auto 0;   /* 0.5rem au-dessus, centré horizontalement */
   padding: 0.4rem 0.8rem;
   background-color: #4682B4;
   color: #fff;
