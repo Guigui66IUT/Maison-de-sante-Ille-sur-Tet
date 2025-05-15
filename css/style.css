@@ -450,28 +450,38 @@ input {
 /*--------------------------------------
   Section SOS Médecin
 --------------------------------------*/
-
-/* --- Alignement de la ligne SOS --- */
 .info-group.sos-group {
-  /* Empile verticalement comme vos horaires */
   display: flex;
   flex-direction: column;
-  align-items: center;      /* centre horizontalement les enfants */
+  align-items: flex-start;
   gap: 0.5rem;
   margin: 5px 0;
 }
 
-/* --- Ligne de texte --- */
-.sos-action .info-text {
-  /* reprend les mêmes règles que vos <p> horaires */
-  display: block !important;
-  width: 90% !important;      /* même largeur que .card p */
-  margin: 0 auto 5px !important;
-  text-align: left !important;
+.sos-action {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* --- Bouton centré dessous --- */
+.sos-action .info-text {
+  width: 90%;
+  margin: 0 auto 5px;
+  text-align: left;
+}
+
 .sos-action .btn-sos {
   display: block;
-  margin: 0.5rem auto 0;      /* 0.5rem au-dessus, centré */
+  margin: 0.5rem auto 0;
+  padding: 0.4rem 0.8rem;
+  background-color: #4682B4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.sos-action .btn-sos:hover {
+  background-color: #1E3F66;
 }
