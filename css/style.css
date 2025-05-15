@@ -451,42 +451,27 @@ input {
   Section SOS Médecin
 --------------------------------------*/
 
-/* Empile verticalement et aligne tout à gauche */
+/* --- Alignement de la ligne SOS --- */
 .info-group.sos-group {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start;
+  /* Empile verticalement comme vos horaires */
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* centre horizontalement les enfants */
   gap: 0.5rem;
   margin: 5px 0;
 }
 
-/* Conteneur texte + bouton en bloc */
-.sos-action {
-  display: block;
-  width: 100%;
-}
-
-/* Texte SOS Médecin aligné à gauche sur 100% de la largeur */
+/* --- Ligne de texte --- */
 .sos-action .info-text {
-  display: block;
-  width: 100%;
-  margin: 0 0 0.5rem 0;  /* même espacement que les lignes d'horaires */
-  text-align: left;
+  /* reprend les mêmes règles que vos <p> horaires */
+  display: block !important;
+  width: 90% !important;      /* même largeur que .card p */
+  margin: 0 auto 5px !important;
+  text-align: left !important;
 }
 
-/* Bouton Prendre RDV centré sous le texte */
+/* --- Bouton centré dessous --- */
 .sos-action .btn-sos {
-  display: inline-block;
-  margin: 0 auto;         /* centre horizontalement */
-  padding: 0.4rem 0.8rem;
-  background-color: #4682B4;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-.sos-action .btn-sos:hover {
-  background-color: #1E3F66;
+  display: block;
+  margin: 0.5rem auto 0;      /* 0.5rem au-dessus, centré */
 }
