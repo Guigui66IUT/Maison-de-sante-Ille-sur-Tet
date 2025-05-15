@@ -449,36 +449,36 @@ input {
 
 /*--------------------------------------
   Section SOS Médecin
----------------------------------------*/
-/* Aligne horizontalement le groupe */
-/* Remplace ce qui force .sos-group en ligne */
+--------------------------------------*/
+
+/* Empile verticalement le groupe SOS */
 .info-group.sos-group {
   display: flex !important;
-  flex-direction: column !important;   /* vertical stacking */
-  align-items: flex-start;             /* tout à gauche */
-  gap: 0.75rem;                         /* espacement entre info et bouton */
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 5px 0;
 }
 
-/* Ajuste le conteneur texte + bouton */
+/* Conteneur texte + bouton centré */
 .sos-action {
   display: flex;
   align-items: center;
-  justify-content: space-between;      /* pousse le bouton à droite */
-  width: 100%;                         /* occupe toute la largeur */
-  margin-top: 0;                       /* pas de marge inutile */
+  justify-content: center;  /* centre horizontalement */
+  width: 100%;
+  gap: 0.5rem;
 }
 
-/* Assure-toi que le texte ne force pas de largeur à 100% */
+/* Le texte ne force pas de largeur */
 .sos-action .info-text {
   width: auto !important;
   flex: 0 1 auto !important;
   margin: 0;
+  text-align: center;
 }
-
 
 /* Bouton Prendre RDV */
 .sos-action .btn-sos {
-  margin-left: auto;
   display: inline-block;
   padding: 0.4rem 0.8rem;
   background-color: #4682B4;
