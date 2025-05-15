@@ -460,23 +460,25 @@ input {
   margin: 5px 0;
 }
 
-/* Conteneur texte + bouton en grid */
+/* Conteneur texte + bouton centré */
 .sos-action {
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
   align-items: center;
+  justify-content: center;  /* centre horizontalement */
   width: 100%;
+  gap: 0.5rem;
 }
 
-/* Le texte reste aligné à gauche */
+/* Le texte ne force pas de largeur */
 .sos-action .info-text {
-  justify-self: start;
+  width: auto !important;
+  flex: 0 1 auto !important;
   margin: 0;
+  text-align: center;
 }
 
-/* Le bouton est centré dans la seconde cellule */
+/* Bouton Prendre RDV */
 .sos-action .btn-sos {
-  justify-self: center;
   display: inline-block;
   padding: 0.4rem 0.8rem;
   background-color: #4682B4;
