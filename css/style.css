@@ -74,164 +74,184 @@ nav {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 .main-header nav a:last-child {
 	margin-left: auto;
 	/* Met le lien "Contact" tout à droite */
 }
 
 
-/* Styles pour le menu déroulant */
-.dropdown {
-	position: relative;
-	display: inline-block;
+
+
+
+
+
+
+
+
+
+/*--------------------------------------
+  Header & Navigation - Desktop & Mobile
+---------------------------------------*/
+
+/* Masquer le checkbox de contrôle */
+#menu {
+  display: none;
 }
 
-.dropdown-menu {
-	display: none;
-	position: absolute;
-	background-color: #4682B4;
-	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	width: 250px;
+/* Conteneur header */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #4682B4;
+  padding: 1rem 2rem;
+  position: relative;
+  z-index: 1000;
 }
 
-.dropdown-menu li {
-	padding: 0;
+/* Logo */
+.main-header .logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
 }
 
-.dropdown-menu li a {
-	color: white;
-	text-decoration: none;
-	display: block;
-	width: 100%;
-	/* Prend toute la largeur de .dropdown-menu */
-	padding: 15px 16px;
-	/* Ajouter du padding au lien lui-même */
-	box-sizing: border-box;
-	/* Assurer que le padding est inclus dans la largeur */
+/* Menu desktop */
+.main-header nav {
+  display: flex;
+  gap: 1rem;
 }
 
-.dropdown-menu li a:hover {
-	background-color: #1E3F66;
-	/* Couleur de fond au survol */
+.main-header nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease-in-out;
 }
-
-.dropdown:hover .dropdown-menu {
-	display: block;
-}
-
-.dropdown:hover .dropdown-toggle {
-	background-color: #1E3F66;
-}
-
-
 
 .main-header nav a:hover,
 .main-header nav a.active {
-	background-color: #1E3F66;
-	/* Couleur de fond au survol */
+  background-color: #1E3F66;
 }
 
-/* Pour appliquer la classe active au lien actuellement sélectionné */
-.active {
-	background-color: #1E3F66;
-	/* Même couleur que sur le hover */
+/* Dropdown desktop */
+.dropdown {
+  position: relative;
 }
 
-
-
-
-
-input {
-	display: none;
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-@media (max-width: 1296px) {
-	.main-header nav {
-		position: absolute;
-		top: 85px;
-		background: #4682B4;
-		left: 0;
-		flex-direction: column;
-		width: 100%;
-		align-items: center;
-
-		height: 0;
-		transition: 0.5s;
-		overflow: hidden;
-	}
-
-	.main-header nav a:last-child {
-		margin-left: 0;
-		/* Met le lien "Contact" tout à droite */
-	}
-
-	.main-header nav a:nth-child(1) {
-		margin-top: 42px;
-	}
-
-	.main-header label {
-		width: 45px;
-		height: 30px;
-		position: relative;
-	}
-
-	.main-header label div {
-		width: 100%;
-		height: 5px;
-		background: white;
-		position: absolute;
-		transform: translateY(-50%);
-		border-radius: 99px;
-		transition: 0.3s;
-		transform: scale(1);
-	}
-
-	.main-header label div:nth-child(1) {
-		top: 0;
-	}
-
-	.main-header label div:nth-child(2) {
-		top: 50%;
-	}
-
-	.main-header label div:nth-child(3) {
-		top: 100%;
-	}
-
-	input:checked+.main-header nav {
-		height: 100vh;
-	}
-
-	input:checked+.main-header label div:nth-child(1) {
-		transform: rotate(45deg);
-		top: 50%;
-	}
-
-	input:checked+.main-header label div:nth-child(3) {
-		transform: rotate(-45deg);
-		top: 50%;
-	}
-
-	input:checked+.main-header label div:nth-child(2) {
-		transform: scale(0);
-		opacity: 0;
-	}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #4682B4;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 200px;
+  z-index: 1000;
+  flex-direction: column;
 }
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #1E3F66;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+/*--------------------------------------
+  Burger Toggle (Mobile)
+---------------------------------------*/
+
+/* Masquer en desktop */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.menu-toggle div {
+  width: 100%;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/*--------------------------------------
+  Responsive (<768px)
+---------------------------------------*/
+@media (max-width: 768px) {
+  /* Afficher le burger */
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Cacher le nav par défaut */
+  .main-header nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background-color: #4682B4;
+    transition: height 0.3s ease-in-out;
+  }
+
+  /* Dérouler le menu quand la case est cochée */
+  input:checked + .main-header nav {
+    height: calc(100vh - 4rem); /* ajuster 4rem selon la hauteur de votre header */
+  }
+
+  /* Transformer le burger en "X" */
+  input:checked + .main-header .menu-toggle div:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  input:checked + .main-header .menu-toggle div:nth-child(2) {
+    opacity: 0;
+  }
+  input:checked + .main-header .menu-toggle div:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Espacement des liens en mobile */
+  .main-header nav a {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Désactiver le hover du dropdown en mobile */
+  .dropdown:hover .dropdown-menu {
+    display: none;
+  }
+}
+
 
 
 
