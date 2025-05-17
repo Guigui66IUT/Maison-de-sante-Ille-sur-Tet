@@ -40,21 +40,38 @@
 
 <script type="text/javascript">
   function googleTranslateElementInit() {
-    // On retrouve notre bouton “Langue”
+    // 1. Récupère le bouton “Langue”
     const btn = document.querySelector('.translate-dropdown');
     if (!btn) return;
 
-    // On lui donne l’id attendu par l’API
+    // 2. Ajoute l’ID nécessaire pour que Google Translate cible ce conteneur
     btn.id = 'google_translate_element';
 
-    // On initialise le widget Google Translate à l’intérieur de ce bouton
+    // 3. Initialise le widget Google Translate
     new google.translate.TranslateElement({
       pageLanguage: 'fr',
       includedLanguages: 'en,es,de,it,pt',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
+
+    // 4. Après un court délai (le temps que Google injecte le <select>), 
+    //    on fait en sorte que cliquer sur “Langue” ouvre le combo dropdown
+    setTimeout(() => {
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        // Supprime le href pour éviter toute navigation
+        btn.removeAttribute('href');
+        // Quand on clique sur le lien “Langue”, on simule un clic sur le <select>
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          combo.focus();
+          combo.click();
+        });
+      }
+      // Masquer tout texte ou cadre indésirable injecté
+      const gtFrame = document.querySelector('.skiptranslate');
+      if (gtFrame) gtFrame.style.display = 'none';
+    }, 500);
   }
 </script>
-<script
-  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
