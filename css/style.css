@@ -500,20 +500,25 @@ input {
 
 
 
-/* Le bouton “Langue” */
-.translate-dropdown {
+/* Conteneur positionné pour que la liste absolute se cale sous le lien */
+.translate-wrapper {
   position: relative;
+  display: inline-block;
+  margin-left: 0.5rem; /* espace après “Actualités” */
+}
+
+/* Bouton “Langue” */
+.translate-dropdown {
   cursor: pointer;
   color: #4682B4;
   font-weight: bold;
-  margin-left: 0.5rem;
   user-select: none;
 }
 
-/* La liste, masquée par défaut */
+/* Liste masquée par défaut */
 .lang-list {
   position: absolute;
-  top: 100%;            /* juste en dessous de “Langue” */
+  top: 100%;       /* juste sous le bouton */
   left: 0;
   display: none;
   background: #fff;
@@ -521,17 +526,16 @@ input {
   border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   list-style: none;
-  margin: 0.25rem 0 0 0;
+  margin: 0.25rem 0 0;
   padding: 0;
   z-index: 1000;
 }
 
-/* Quand on ajoute .show, on l’affiche */
+/* Liste visible quand on ajoute la classe .show */
 .lang-list.show {
   display: block;
 }
 
-/* Style des items */
 .lang-list li {
   padding: 0.5rem 1rem;
   cursor: pointer;
