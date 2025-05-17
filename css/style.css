@@ -578,7 +578,6 @@ input {
 .translate-dropdown {
   position: relative;
   display: inline-block;
-  padding: 15px 16px;       /* même padding que vos liens nav */
   background-color: #4682B4;
   color: #fff;
   text-decoration: none;
@@ -598,7 +597,6 @@ input {
   top: 100%;                /* juste sous le bouton */
   left: 0;
   background-color: #4682B4;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
   list-style: none;
   margin: 0;                /* plus d’espace inutile */
   padding: 0;
