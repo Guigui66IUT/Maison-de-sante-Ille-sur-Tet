@@ -1,40 +1,42 @@
-// /js/translate.js
+// /js/translate-ui.js
 (function() {
-  console.log('translate.js chargé');
+  console.log('translate-ui.js chargé');
 
-  // 1) Callback appelée par Google (cb=googleTranslateElementInit)
+  // 1) Callback pour Google Translate (cb=...)
   window.googleTranslateElementInit = function() {
-    console.log('🛠️ googleTranslateElementInit called');
+    console.log('🛠️ googleTranslateElementInit appelé');
 
-    // Crée/obtient le container caché
-    const CONTAINER_ID = 'google_translate_element';
-    let container = document.getElementById(CONTAINER_ID);
-    if (!container) {
-      container = document.createElement('div');
-      container.id = CONTAINER_ID;
-      container.style.display = 'none';
-      document.body.appendChild(container);
+    // Crée le container (invisible) pour le widget
+    const ID = 'google_translate_element';
+    let c = document.getElementById(ID);
+    if (!c) {
+      c = document.createElement('div');
+      c.id = ID;
+      c.style.display = 'none';
+      document.body.appendChild(c);
     }
 
-    // Initialise le widget
+    // Initialise Google Translate
     new google.translate.TranslateElement({
       pageLanguage: 'fr',
       includedLanguages: 'fr,en,es,de,it,pt',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, CONTAINER_ID);
-
-    console.log('🚀 Widget Google Translate initialisé (caché)');
+    }, ID);
+    console.log('🚀 Widget Google Translate initialisé');
   };
 
-  // 2) Construction du menu “Langue” + binding du clic
-  function initLanguageMenu() {
+  // 2) Injection du menu statique + binding clics
+  function initMenu() {
     const btn = document.querySelector('.translate-dropdown');
     if (!btn) {
-      return setTimeout(initLanguageMenu, 200);
+      return setTimeout(initMenu, 200);
     }
-    console.log('✅ Bouton Langue trouvé:', btn);
+    console.log('✅ Bouton Langue trouvé');
 
-    // Si la liste n’est pas encore injectée, on la crée
+    // Supprime son href pour ne pas naviguer
+    btn.removeAttribute('href');
+
+    // Si la liste n’existe pas, on la crée
     if (!btn.querySelector('.lang-list')) {
       const langs = [
         { code: 'fr', label: 'Français' },
@@ -44,10 +46,9 @@
         { code: 'it', label: 'Italiano' },
         { code: 'pt', label: 'Português' }
       ];
-
       const ul = document.createElement('ul');
       ul.className = 'lang-list';
-      langs.forEach(({ code, label }) => {
+      langs.forEach(({code,label}) => {
         const li = document.createElement('li');
         li.textContent = label;
         li.dataset.lang = code;
@@ -58,22 +59,20 @@
       console.log('🛠️ Liste des langues injectée');
     }
 
-    // 3) Au clic sur un <li>, on pose le cookie et on recharge
+    // 3) Clic sur <li> → pose cookie et reload
     btn.querySelectorAll('.lang-list li').forEach(li => {
-      li.addEventListener('click', () => {
+      li.addEventListener('click', e => {
         const lang = li.dataset.lang;
         console.log('🌐 Langue choisie :', lang);
-        // On pose uniquement path=/, pas de domain
+        // Pose cookie googtrans sans domain, seulement path
         document.cookie = `googtrans=/fr/${lang};path=/`;
-        console.log('🍪 Cookie googtrans posé (path=/):', document.cookie);
-        // On recharge la page
+        console.log('🍪 Cookie googtrans posé:', document.cookie);
+        // Recharge pour que GT prenne en compte
         window.location.reload();
       });
     });
   }
 
   // 4) Lancement
-  document.addEventListener('DOMContentLoaded', () => {
-    initLanguageMenu();
-  });
+  document.addEventListener('DOMContentLoaded', initMenu);
 })();
