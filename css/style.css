@@ -501,38 +501,24 @@ input {
 
 
 /*========================================
-  Global Nav Overflow
+  Dropdown “Langue” dans le nav (survol)
 ========================================*/
-/* Permettre au dropdown de déborder du nav */
+
+/* 1) Autoriser le dropdown à déborder du <nav> */
 .main-header nav {
   overflow: visible !important;
 }
 
-/*========================================
-  Google Translate Widget (caché)
-========================================*/
-/* Conteneur de Google Translate */
-#google_translate_element,
-.goog-te-gadget,
-.goog-te-combo,
-.goog-logo-link,
-.goog-te-banner-frame.skiptranslate {
-  display: none !important;
-}
-
-/*========================================
-  Dropdown “Langue” (survol)
-========================================*/
-/* 1) Lien “Langue” */
+/* 2) Style du lien “Langue” */
 .translate-dropdown {
   position: relative;
   display: inline-block;
+  padding: 15px 16px;
   margin-left: 1rem;               /* espace après “Actualités” */
-  padding: 15px 16px;              /* même padding que vos autres liens */
   background-color: #4682B4;
   color: #fff;
   text-decoration: none;
-  border-radius: 0;                /* coins carrés */
+  border-radius: 0;                /* plus d’arrondi */
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -540,46 +526,44 @@ input {
   background-color: #1E3F66;
 }
 
-/* 2) Liste des langues (identique à .dropdown-menu) */
+/* 3) Style de la liste déroulante */
 .translate-dropdown .lang-list {
   position: absolute;
   top: 100%;                       /* juste sous le lien */
   left: 0;
   display: none;                   /* masquée par défaut */
-  width: 250px;                    /* même largeur que vos autres menus */
+  width: 250px;                    /* même largeur que vos menus */
   margin: 0;
   padding: 0;
   list-style: none;
   background-color: #4682B4;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  border-radius: 0;                /* coins carrés */
+  border-radius: 0;                /* plus d’arrondi */
   z-index: 1000;
 }
 
-/* 3) Items de la liste */
+/* 4) Items de la liste */
 .translate-dropdown .lang-list li {
-  display: block;
-  width: 100%;
-  padding: 15px 16px;              /* même padding que li a */
-  box-sizing: border-box;
+  padding: 15px 16px;              /* même padding que vos liens nav */
   color: #fff;
-  text-decoration: none;
   cursor: pointer;
 }
 .translate-dropdown .lang-list li:hover {
   background-color: #1E3F66;
 }
 
-/* 4) Afficher au survol */
+/* 5) Afficher la liste au survol du lien ou de la liste */
 .translate-dropdown:hover .lang-list,
 .translate-dropdown .lang-list:hover {
   display: block;
 }
 
-/* 5) Supprimer bordures et outlines */
+/* 6) Supprimer tout contour ou bordure */
 .translate-dropdown,
 .translate-dropdown .lang-list,
 .translate-dropdown .lang-list li {
   border: none !important;
   outline: none !important;
 }
+
+
