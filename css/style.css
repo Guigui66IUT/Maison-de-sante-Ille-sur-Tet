@@ -525,3 +525,26 @@ body { top: 0 !important; }
 
 
 
+/* –– Cacher toute l’UI “gadget” de Google Translate –– */
+.translate-dropdown .goog-te-gadget,
+.translate-dropdown .goog-logo-link {
+  display: none !important;
+}
+
+/* –– Ne laisser que le <select> des langues –– */
+.translate-dropdown .goog-te-combo {
+  display: inline-block !important;
+  width: auto !important;
+  padding: 0.4rem 0.8rem;
+  background: #4682B4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* –– S’assurer que rien ne déborde du nav en mobile –– */
+.main-header nav {
+  overflow: visible !important;
+}
