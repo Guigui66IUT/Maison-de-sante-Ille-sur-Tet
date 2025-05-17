@@ -495,39 +495,22 @@ input {
 
 
 
-/* 1) Le nav doit laisser passer le dropdown */
+/* 1) Autoriser le dropdown à déborder du nav */
 .main-header nav {
   overflow: visible !important;
 }
 
-/* 2) Style du déclencheur “Langue” */
+/* 2) Styliser le lien “Langue” */
 .translate-dropdown {
-  display: inline-block;
   cursor: pointer;
   color: #4682B4;
   font-weight: bold;
   margin-left: 0.5rem;
-  position: relative;
 }
 
-/* 3) On affiche explicitement le conteneur Google Translate */
-.translate-dropdown .goog-te-gadget {
-  display: inline-block !important;
-  direction: ltr;
-}
-
-/* 4) On masque uniquement le logo/powered-by et les spans indésirables */
-.translate-dropdown .goog-te-gadget .goog-logo-link,
-.translate-dropdown .goog-te-gadget .goog-te-gadget-icon,
-.translate-dropdown .goog-te-gadget .goog-te-combo option[style] {
-  display: none !important;
-}
-
-/* 5) On stylise le <select> lui-même */
-.translate-dropdown .goog-te-gadget select.goog-te-combo {
-  display: inline-block !important;
+/* 3) Styliser le <select> injecté */
+.translate-combo {
   appearance: none;
-  -webkit-appearance: none;
   background: #4682B4;
   color: #fff;
   border: none;
@@ -535,10 +518,10 @@ input {
   padding: 4px 8px;
   font-size: 0.9rem;
   cursor: pointer;
-  margin: 0;
+  margin-left: 0.25rem;
 }
 
-/* 6) On cache la barre flottante Google */
+/* 4) Masquer la barre flottante Google Translate */
 .goog-te-banner-frame.skiptranslate {
   display: none !important;
 }
