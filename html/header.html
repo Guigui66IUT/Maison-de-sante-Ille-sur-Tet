@@ -38,40 +38,41 @@
 
 
 
-<script type="text/javascript">
+<!-- Votre contenu HTML… -->
+
+<!-- 1) Déclaration de la fonction d’initialisation -->
+<script>
+  console.log('🚀 Avant init');  // <— Vérifiez qu’on voit bien ce log
   function googleTranslateElementInit() {
-    // 1. Récupère le bouton “Langue”
+    console.log('🛠️ googleTranslateElementInit appelé');
     const btn = document.querySelector('.translate-dropdown');
+    console.log('Bouton trouvé :', btn);
     if (!btn) return;
 
-    // 2. Ajoute l’ID nécessaire pour que Google Translate cible ce conteneur
     btn.id = 'google_translate_element';
-
-    // 3. Initialise le widget Google Translate
     new google.translate.TranslateElement({
       pageLanguage: 'fr',
       includedLanguages: 'en,es,de,it,pt',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
 
-    // 4. Après un court délai (le temps que Google injecte le <select>), 
-    //    on fait en sorte que cliquer sur “Langue” ouvre le combo dropdown
     setTimeout(() => {
       const combo = document.querySelector('.goog-te-combo');
+      console.log('Combo trouvé :', combo);
       if (combo) {
-        // Supprime le href pour éviter toute navigation
         btn.removeAttribute('href');
-        // Quand on clique sur le lien “Langue”, on simule un clic sur le <select>
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           combo.focus();
           combo.click();
         });
       }
-      // Masquer tout texte ou cadre indésirable injecté
       const gtFrame = document.querySelector('.skiptranslate');
       if (gtFrame) gtFrame.style.display = 'none';
     }, 500);
   }
+  console.log('🚀 Après init');
 </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- 2) Chargement de la librairie Google Translate -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
