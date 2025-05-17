@@ -3,50 +3,69 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('translate.js loaded');
 
-  // 1) On déclare la callback pour Google Translate
+  // 1) callback Google Translate
   window.googleTranslateElementInit = function() {
-    console.log('🔥 googleTranslateElementInit callback');
-    const btn = document.querySelector('.translate-dropdown');
-    if (!btn) return;
+    console.log('🔥 googleTranslateElementInit called');
 
-    // Crée le container Google (caché) si nécessaire
-    if (!document.getElementById('google_translate_element')) {
-      const cont = document.createElement('div');
-      cont.id = 'google_translate_element';
-      cont.style.display = 'none';
-      btn.after(cont);
-      new google.translate.TranslateElement({
-        pageLanguage: 'fr',
-        includedLanguages: 'en,es,de,it,pt',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-      console.log('🚀 Google Translate widget initialized (hidden)');
+    const btn = document.querySelector('.translate-dropdown');
+    if (!btn) {
+      console.warn('⚠️ .translate-dropdown not found, retrying...');
+      return setTimeout(googleTranslateElementInit, 200);
     }
+    console.log('👍 Found button:', btn);
+
+    // 2) créer le container (visible) pour que Google injecte son select
+    let container = document.getElementById('google_translate_element');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'google_translate_element';
+      btn.after(container);
+    }
+
+    // 3) initialiser le widget
+    new google.translate.TranslateElement({
+      pageLanguage: 'fr',
+      includedLanguages: 'en,es,de,it,pt',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+    console.log('🚀 Google Translate widget initialized');
+
+    // 4) attendre l'injection du <select>
+    let attempts = 0;
+    (function waitForSelect() {
+      const gtSelect = container.querySelector('select.goog-te-combo');
+      if (gtSelect) {
+        console.log('🎉 Found <select>:', gtSelect);
+        setupStaticList(btn, gtSelect);
+      } else if (attempts < 40) {
+        attempts++;
+        setTimeout(waitForSelect, 250);
+      } else {
+        console.error('❌ <select> not found after several attempts');
+      }
+    })();
   };
 
-  // 2) Fonction pour initialiser le toggle & le binding
-  function initStaticList() {
-    const btn = document.querySelector('.translate-dropdown');
-    const ul  = document.querySelector('.lang-list');
-    const gtSelect = document.querySelector('select.goog-te-combo');
+  // 5) binding de votre liste statique
+  function setupStaticList(btn, gtSelect) {
+    // masquer le select natif (via CSS de toute façon)
+    gtSelect.style.display = 'none';
 
-    if (!btn || !ul || !gtSelect) {
-      // Repoll si l’un des éléments manque
-      return setTimeout(initStaticList, 200);
+    const ul = document.querySelector('.lang-list');
+    if (!ul) {
+      console.error('❌ .lang-list not found');
+      return;
     }
 
     console.log('✅ Initializing static language list');
 
-    // Cacher le <select> natif
-    gtSelect.style.display = 'none';
-
-    // 3) Toggle de la liste au clic sur “Langue”
+    // toggle affichage
     btn.addEventListener('click', e => {
       e.preventDefault();
-      ul.style.display = ul.style.display === 'block' ? 'none' : 'block';
+      ul.style.display = (ul.style.display === 'block') ? 'none' : 'block';
     });
 
-    // 4) Changer la langue au clic sur un <li>
+    // choix d’une langue
     ul.querySelectorAll('li').forEach(li => {
       li.addEventListener('click', () => {
         const lang = li.dataset.lang;
@@ -57,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // 5) Cacher la liste quand on clique en dehors
+    // clic en dehors
     document.addEventListener('click', e => {
       if (!btn.contains(e.target) && !ul.contains(e.target)) {
         ul.style.display = 'none';
@@ -65,14 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6) On attend que Google ait injecté son <select>, puis on initialise
-  (function waitForGoogleSelect(attempts = 0) {
-    if (document.querySelector('select.goog-te-combo')) {
-      initStaticList();
-    } else if (attempts < 20) {
-      setTimeout(() => waitForGoogleSelect(attempts + 1), 200);
-    } else {
-      console.error('❌ Google Translate <select> not found');
-    }
-  })();
 });
