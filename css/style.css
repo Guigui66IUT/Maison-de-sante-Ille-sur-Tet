@@ -542,6 +542,18 @@ input {
   background: #f0f0f0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* on positionne le bouton comme conteneur */
 .translate-dropdown {
   position: relative;       /* nécessaire pour que .lang-list absolute se cale ici */
@@ -558,5 +570,61 @@ input {
 
 /* quand JS ajoute la classe .show */
 .translate-dropdown .lang-list.show {
+  display: block;
+}
+
+
+/* 1) Transforme le lien en conteneur relatif */
+.translate-dropdown {
+  position: relative;       /* pour le positionnement absolu de la liste */
+  display: inline-block;
+  padding: 0.5rem 1rem;     /* même padding que vos <a> normaux */
+  color: #fff;              /* blanc, pour matcher la nav */
+  background: #4682B4;      /* couleur normale */
+  border-radius: 0.25rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: 1rem;        /* espace après Actualités */
+}
+
+/* 2) Effet hover sur le lien */
+.translate-dropdown:hover {
+  background: #1E3F66;
+}
+
+/* 3) Style de la liste déroulante */
+.lang-list {
+  display: none;            /* masquée par défaut */
+  position: absolute;
+  top: 100%;                /* juste sous le lien */
+  left: 0;
+  background-color: #4682B4;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 250px;             /* même largeur */
+  z-index: 1000;
+}
+
+/* 4) Chaque item reprend le style des .dropdown-menu li a */
+.lang-list li {
+  margin: 0;
+  padding: 0;
+}
+.lang-list li {
+  color: white;
+  padding: 15px 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.lang-list li:hover {
+  background-color: #1E3F66;
+}
+
+/* 5) Afficher la liste quand on survole ou clique */
+.translate-dropdown:hover + .lang-list,
+.lang-list:hover {
   display: block;
 }
