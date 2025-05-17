@@ -73,13 +73,13 @@ nav {
 }
 
 
-/*
+
 .main-header nav a:last-child {
 	margin-left: auto;
-	 Met le dernier lien tout à droite 
+	  
 }
 
-*/
+
 
 
 
@@ -528,9 +528,6 @@ input {
   min-width: 8rem;
 }
 
-.lang-list.show {
-  display: block;
-}
 
 .lang-list li {
   padding: 0.5rem 1rem;
@@ -624,11 +621,11 @@ input {
 }
 
 /* 4) Afficher au survol (pas de clic) */
+/* au survol du lien “Langue” OU de la liste */
 .translate-dropdown:hover + .lang-list,
-.lang-list:hover {
+.translate-dropdown + .lang-list:hover {
   display: block;
 }
-
 
 /* 1) Enlever toute bordure autour de la liste */
 .lang-list {
