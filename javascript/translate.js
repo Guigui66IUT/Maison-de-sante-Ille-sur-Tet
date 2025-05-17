@@ -8,6 +8,7 @@
 function googleTranslateElementInit() {
   // fonction récursive pour attendre la présence du bouton
   function initWhenReady() {
+    console.log('btn ok');
     const btn = document.querySelector('.translate-dropdown');
     if (!btn) {
       return setTimeout(initWhenReady, 200);
