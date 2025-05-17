@@ -16,6 +16,7 @@
     if (!ul) {
       // 1) Création dynamique de la liste
       const langs = [
+        { code: 'fr', label: 'Français'},
         { code: 'en', label: 'English' },
         { code: 'es', label: 'Español' },
         { code: 'de', label: 'Deutsch' },
@@ -31,7 +32,9 @@
         ul.appendChild(li);
       });
       // 2) On insère juste après le bouton
-      btn.parentNode.insertBefore(ul, btn.nextSibling);
+      //btn.parentNode.insertBefore(ul, btn.nextSibling);
+      btn.style.position = 'relative';  // pour que l’absolute soit relatif à ce <a>
+      btn.appendChild(ul);              // la liste devient enfant de <a>
       console.log('🛠️ Liste des langues injectée dans le DOM');
     } else {
       console.log('ℹ️ Lang-list déjà présente');

@@ -541,3 +541,22 @@ input {
 .lang-list li:hover {
   background: #f0f0f0;
 }
+
+/* on positionne le bouton comme conteneur */
+.translate-dropdown {
+  position: relative;       /* nécessaire pour que .lang-list absolute se cale ici */
+}
+
+/* la liste sous le bouton */
+.translate-dropdown .lang-list {
+  position: absolute;
+  top: 100%;                /* juste sous le <a> */
+  left: 0;
+  display: none;            /* on gère l’affichage via JS */
+  /* … tes styles existants (fond, bordure, etc.) … */
+}
+
+/* quand JS ajoute la classe .show */
+.translate-dropdown .lang-list.show {
+  display: block;
+}
