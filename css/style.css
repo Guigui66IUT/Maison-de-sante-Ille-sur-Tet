@@ -496,55 +496,32 @@ input {
 
 
 
-/* Style du lien “Langue” avant injection du select */
+/* 1) Assurer que le <nav> ne tronque pas le dropdown */
+.main-header nav {
+  overflow: visible !important;
+}
+
+/* 2) Style du lien “Langue” */
 .translate-dropdown {
   position: relative;
   display: inline-block;
   cursor: pointer;
   color: #4682B4;
   font-weight: bold;
+  margin-left: 0.5rem; /* espace après “Actualités” */
 }
 
-/* Style du <select> Google Translate qui sera injecté */
-#google_translate_element select {
-  background: #4682B4;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-/* Masquer la barre flottante Google Translate */
-.goog-te-banner-frame.skiptranslate { display: none !important; }
-body { top: 0 !important; }
-
-
-
-
-
-/* Assure que le <nav> laisse passer le <select> */
-.main-header nav {
-  overflow: visible !important;
-}
-
-/* On ne touche pas à .translate-dropdown elle-même */
-
-/* 1) Affiche le conteneur Google Translate */
-.translate-dropdown .goog-te-gadget {
-  display: inline-block !important;
-  direction: ltr; /* pour que le <select> s’affiche bien */
-}
-
-/* 2) Cache tout sauf le <select> */
-.translate-dropdown .goog-te-gadget > *:not(select) {
+/* 3) Masquer les éléments injectés sauf le <select> */
+.translate-dropdown *:not(select) {
   display: none !important;
 }
 
-/* 3) Stylise le <select> des langues */
-.translate-dropdown .goog-te-gadget select.goog-te-combo {
+/* 4) Styliser le <select> des langues */
+.translate-dropdown select.goog-te-combo {
   display: inline-block !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background: #4682B4;
   color: #fff;
   border: none;
@@ -552,7 +529,9 @@ body { top: 0 !important; }
   padding: 4px 8px;
   font-size: 0.9rem;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+}
+
+/* 5) Cacher la barre flottante Google Translate */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
 }
