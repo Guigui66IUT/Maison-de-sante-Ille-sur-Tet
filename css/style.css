@@ -565,3 +565,22 @@ input {
   border: none !important;
   outline: none !important;
 }
+
+
+/* Cache le <select> natif Google Translate */
+#google_translate_element,
+.goog-te-combo {
+  display: none !important;
+}
+
+/* (optionnel) Masque aussi le badge “Powered by Google” */
+.goog-logo-link {
+  display: none !important;
+}
+
+/* Votre style existant pour .translate-dropdown et .lang-list */
+.translate-dropdown { /*…*/ }
+.translate-dropdown:hover .lang-list,
+.translate-dropdown .lang-list:hover { display: block; }
+.lang-list { /*…*/ }
+.lang-list li { /*…*/ }
