@@ -500,151 +500,68 @@ input {
 
 
 
-/*===== STYLE DU BOUTON =====*/
+/*========================================
+  Dropdown “Langue” dans le nav (survol)
+========================================*/
+
+/* 1) Autoriser le dropdown à déborder du <nav> */
+.main-header nav {
+  overflow: visible !important;
+}
+
+/* 2) Style du lien “Langue” */
 .translate-dropdown {
   position: relative;
   display: inline-block;
-  cursor: pointer;
-  color: #4682B4;
-  font-weight: bold;
-  user-select: none;
-  margin-left: 0.5rem; /* espace après “Actualités” */
-}
-
-/*===== STYLE DE LA LISTE =====*/
-.lang-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  display: none;              /* masquée par défaut */
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  list-style: none;
-  margin: 0.25rem 0 0;
-  padding: 0;
-  z-index: 1000;
-  min-width: 8rem;
-}
-
-
-.lang-list li {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.lang-list li:hover {
-  background: #f0f0f0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* on positionne le bouton comme conteneur */
-.translate-dropdown {
-  position: relative;       /* nécessaire pour que .lang-list absolute se cale ici */
-}
-
-/* la liste sous le bouton */
-.translate-dropdown .lang-list {
-  position: absolute;
-  top: 100%;                /* juste sous le <a> */
-  left: 0;
-  display: none;            /* on gère l’affichage via JS */
-  /* … tes styles existants (fond, bordure, etc.) … */
-}
-
-/* quand JS ajoute la classe .show */
-.translate-dropdown .lang-list.show {
-  display: block;
-}
-
-
-/* 1) Bouton “Langue” */
-.translate-dropdown {
-  position: relative;
-  display: inline-block;
-  padding: 15px 16px;       /* même padding que vos liens nav */
+  padding: 15px 16px;
+  margin-left: 1rem;               /* espace après “Actualités” */
   background-color: #4682B4;
   color: #fff;
   text-decoration: none;
-  border-radius: 0;         /* plus d’arrondi */
+  border-radius: 0;                /* plus d’arrondi */
   cursor: pointer;
-  transition: background 0.2s;
-  margin-left: 1rem;        /* espace après Actualités */
+  transition: background-color 0.2s;
 }
 .translate-dropdown:hover {
   background-color: #1E3F66;
 }
 
-/* 2) Liste des langues (identique à .dropdown-menu) */
-.lang-list {
-  display: none;
+/* 3) Style de la liste déroulante */
+.translate-dropdown .lang-list {
   position: absolute;
-  top: 100%;                /* juste sous le bouton */
+  top: 100%;                       /* juste sous le lien */
   left: 0;
-  background-color: #4682B4;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  list-style: none;
-  margin: 0;                /* plus d’espace inutile */
+  display: none;                   /* masquée par défaut */
+  width: 250px;                    /* même largeur que vos menus */
+  margin: 0;
   padding: 0;
-  width: 250px;
+  list-style: none;
+  background-color: #4682B4;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 0;                /* plus d’arrondi */
   z-index: 1000;
-  border-radius: 0;         /* plus d’arrondi */
 }
 
-/* 3) Items de la liste (comme vos li a dans .dropdown-menu) */
-.lang-list li {
-  margin: 0;
-}
-.lang-list li {
-  display: block;
-  width: 100%;
-  padding: 15px 16px;
-  box-sizing: border-box;
+/* 4) Items de la liste */
+.translate-dropdown .lang-list li {
+  padding: 15px 16px;              /* même padding que vos liens nav */
   color: #fff;
-  text-decoration: none;
+  cursor: pointer;
 }
-.lang-list li:hover {
+.translate-dropdown .lang-list li:hover {
   background-color: #1E3F66;
 }
 
-/* 4) Afficher au survol (pas de clic) */
-/* au survol du lien “Langue” OU de la liste */
-.translate-dropdown:hover + .lang-list,
-.translate-dropdown + .lang-list:hover {
+/* 5) Afficher la liste au survol du lien ou de la liste */
+.translate-dropdown:hover .lang-list,
+.translate-dropdown .lang-list:hover {
   display: block;
 }
 
-/* 1) Enlever toute bordure autour de la liste */
-.lang-list {
-  border: none !important;
-  outline: none !important;
-}
-
-/* 2) Supprimer l’outline quand la liste ou ses items sont ciblés */
+/* 6) Supprimer tout contour ou bordure */
 .translate-dropdown,
-.translate-dropdown:focus,
-.lang-list,
-.lang-list:focus,
-.lang-list li,
-.lang-list li:focus {
-  outline: none !important;
-}
-
-/* 3) Si un navigateur ajoute un border implicitement */
-.lang-list,
-.lang-list li {
+.translate-dropdown .lang-list,
+.translate-dropdown .lang-list li {
   border: none !important;
+  outline: none !important;
 }
