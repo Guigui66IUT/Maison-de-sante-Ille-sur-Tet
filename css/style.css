@@ -500,27 +500,23 @@ input {
 
 
 
-/* Conteneur positionné pour que la liste absolute se cale sous le lien */
-.translate-wrapper {
+/*===== STYLE DU BOUTON =====*/
+.translate-dropdown {
   position: relative;
   display: inline-block;
-  margin-left: 0.5rem; /* espace après “Actualités” */
-}
-
-/* Bouton “Langue” */
-.translate-dropdown {
   cursor: pointer;
   color: #4682B4;
   font-weight: bold;
   user-select: none;
+  margin-left: 0.5rem; /* espace après “Actualités” */
 }
 
-/* Liste masquée par défaut */
+/*===== STYLE DE LA LISTE =====*/
 .lang-list {
   position: absolute;
-  top: 100%;       /* juste sous le bouton */
+  top: 100%;
   left: 0;
-  display: none;
+  display: none;              /* masquée par défaut */
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -529,9 +525,9 @@ input {
   margin: 0.25rem 0 0;
   padding: 0;
   z-index: 1000;
+  min-width: 8rem;
 }
 
-/* Liste visible quand on ajoute la classe .show */
 .lang-list.show {
   display: block;
 }
@@ -541,6 +537,7 @@ input {
   cursor: pointer;
   white-space: nowrap;
 }
+
 .lang-list li:hover {
   background: #f0f0f0;
 }
